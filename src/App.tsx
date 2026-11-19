@@ -11,11 +11,16 @@ import { ImpactQuote } from './components/ImpactQuote';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { StoryModal } from './components/StoryModal';
+import { StoryEventType } from './types';
 
 export default function App() {
   const [storyModalOpen, setStoryModalOpen] = useState(false);
+  const [initialEventType, setInitialEventType] = useState<StoryEventType>('casamento');
 
-  const handleOpenStoryModal = () => {
+  const handleOpenStoryModal = (eventType?: StoryEventType) => {
+    if (eventType) {
+      setInitialEventType(eventType);
+    }
     setStoryModalOpen(true);
   };
 
@@ -26,10 +31,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#2C2C2C] font-sans selection:bg-[#1C2D5A] selection:text-white">
       {/* 1. HEADER */}
-      <Header onOpenStoryModal={handleOpenStoryModal} />
+      <Header onOpenStoryModal={() => handleOpenStoryModal()} />
 
       {/* 2. HERO */}
-      <Hero onOpenStoryModal={handleOpenStoryModal} />
+      <Hero onOpenStoryModal={() => handleOpenStoryModal()} />
 
       {/* 3. MANIFESTO */}
       <Manifesto />
@@ -53,15 +58,16 @@ export default function App() {
       <ImpactQuote />
 
       {/* 10. CTA FINAL */}
-      <FinalCTA onOpenStoryModal={handleOpenStoryModal} />
+      <FinalCTA onOpenStoryModal={() => handleOpenStoryModal()} />
 
       {/* 11. FOOTER */}
       <Footer />
 
-      {/* STORY BRIEFING HELPER MODAL */}
+      {/* STORY BRIEFING & WHATSAPP MODAL */}
       <StoryModal
         isOpen={storyModalOpen}
         onClose={handleCloseStoryModal}
+        initialEventType={initialEventType}
       />
     </div>
   );

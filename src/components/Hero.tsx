@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowDown, Heart, Sparkles } from 'lucide-react';
-import { CastleLogo } from './CastleLogo';
+import { HERO_MOODBOARD_IMAGES } from '../data/portfolioData';
+import { EditorialImage } from './EditorialImage';
 
 interface HeroProps {
   onOpenStoryModal: () => void;
@@ -9,14 +10,16 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenStoryModal }) => {
   return (
-    <section id="inicio" className="relative min-h-screen pt-28 pb-16 md:pt-36 md:pb-24 flex items-center justify-center overflow-hidden bg-[#FAF8F5]">
+    <section
+      id="inicio"
+      className="relative min-h-screen pt-28 pb-16 md:pt-36 md:pb-24 flex items-center justify-center overflow-hidden bg-[#FAF8F5]"
+    >
       {/* Decorative ambient background subtle gradients */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#F3ECE0]/50 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 right-10 w-80 h-80 bg-[#E8EFF8]/40 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
           {/* Left Column: Typography & Story Messaging */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -25,13 +28,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenStoryModal }) => {
             className="lg:col-span-6 flex flex-col items-start text-left space-y-6 md:space-y-8"
           >
             {/* Top Brand Tagline */}
-            <div className="inline-flex items-center space-x-2 text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.35em] uppercase font-semibold text-[#1C2D5A] border-b border-[#1C2D5A]/20 pb-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#EAA227]" />
-              <span>CASTLE CRIAÇÕES · IDENTIDADE VISUAL AFETIVA</span>
+            <div className="inline-flex items-center space-x-2 text-[11px] sm:text-xs tracking-[0.28em] sm:tracking-[0.35em] uppercase font-semibold text-[#1C2D5A] border-b border-[#1C2D5A]/20 pb-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#EAA227] shrink-0" />
+              <span>Castle Criações · Identidade Visual Afetiva</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal text-[#1A1A1A] leading-[1.12] tracking-tight">
+            <h1
+              className="text-4xl sm:text-5xl lg:text-6xl font-serif font-normal text-[#1A1A1A] leading-[1.12] tracking-tight"
+              style={{ textWrap: 'balance' }}
+            >
               Identidades que transformam histórias em celebrações.
             </h1>
 
@@ -44,14 +50,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenStoryModal }) => {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3.5 sm:space-y-0 sm:space-x-4 w-full sm:w-auto pt-2">
               <a
                 href="#portfolio"
-                className="inline-flex items-center justify-center px-7 py-3.5 text-xs tracking-widest uppercase font-medium text-white bg-[#1C2D5A] rounded-full shadow-sm hover:bg-[#0F1E40] transition-all duration-300 hover:shadow-md text-center"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-xs tracking-widest uppercase font-medium text-white bg-[#1C2D5A] rounded-full shadow-sm hover:bg-[#0F1E40] transition-all duration-300 hover:shadow-md text-center whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C2D5A]"
               >
                 Conheça nosso trabalho
               </a>
 
               <button
+                type="button"
                 onClick={onOpenStoryModal}
-                className="inline-flex items-center justify-center px-7 py-3.5 text-xs tracking-widest uppercase font-medium text-[#1C2D5A] border border-[#1C2D5A]/50 rounded-full hover:bg-[#1C2D5A] hover:text-white transition-all duration-300 text-center space-x-2 group"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-xs tracking-widest uppercase font-medium text-[#1C2D5A] border border-[#1C2D5A]/50 rounded-full hover:bg-[#1C2D5A] hover:text-white transition-all duration-300 text-center space-x-2 group whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C2D5A]"
               >
                 <Heart className="w-3.5 h-3.5 text-[#D81B60] group-hover:text-white transition-colors" />
                 <span>Conte-nos sua história</span>
@@ -59,87 +66,119 @@ export const Hero: React.FC<HeroProps> = ({ onOpenStoryModal }) => {
             </div>
 
             {/* Discreet scroll indicator */}
-            <div className="pt-8 hidden sm:flex items-center space-x-3 text-xs text-[#7A7A7A] tracking-widest uppercase font-light">
-              <a href="#manifesto" className="flex items-center space-x-2 hover:text-[#1C2D5A] transition-colors">
+            <div className="pt-8 hidden sm:flex items-center space-x-3 text-xs text-[#5E564B] tracking-widest uppercase font-medium">
+              <a
+                href="#manifesto"
+                className="flex items-center space-x-2 hover:text-[#1C2D5A] transition-colors"
+              >
                 <span>Role para explorar</span>
                 <ArrowDown className="w-3.5 h-3.5 animate-bounce text-[#1C2D5A]" />
               </a>
             </div>
           </motion.div>
 
-          {/* Right Column: Editorial Moodboard Layout */}
+          {/* Right Column: Structured Editorial Moodboard */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-            className="lg:col-span-6 relative w-full h-[480px] sm:h-[560px] md:h-[600px] flex items-center justify-center my-4 lg:my-0"
+            transition={{ duration: 0.9, delay: 0.15, ease: 'easeOut' }}
+            className="lg:col-span-6 w-full my-4 lg:my-0"
           >
-            {/* Background Moodboard Base Panel */}
-            <div className="absolute inset-0 bg-[#F4EFEA] border border-[#E5DDD2] rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xs">
-              <div className="flex justify-between items-start text-[10px] uppercase tracking-widest text-[#8C8275]">
+            <div className="bg-[#F4EFEA] border border-[#E5DDD2] rounded-3xl p-5 sm:p-7 shadow-xs flex flex-col gap-5">
+              {/* Moodboard Top Meta Bar */}
+              <div className="flex justify-between items-center text-[10px] uppercase tracking-[0.22em] text-[#5E564B] font-medium">
                 <span>Castle Moodboard Studio</span>
-                <span>Ref. #2026.01</span>
+                <span>Acervo Autoral</span>
               </div>
-              <div className="flex justify-between items-end text-[10px] uppercase tracking-widest text-[#8C8275]">
-                <span>Afetividade & Sensibilidade</span>
+
+              {/* Top Row: Two Balanced Vertical Editorial Frames */}
+              <div className="grid grid-cols-2 gap-4">
+                {/* Frame 1: Monograma & Lacre */}
+                <div className="bg-white rounded-2xl shadow-sm border border-[#EAE2D8] p-2.5 flex flex-col group transition-shadow duration-300 hover:shadow-md">
+                  <div className="w-full aspect-[4/5] rounded-xl overflow-hidden bg-[#FAF7F2]">
+                    <EditorialImage
+                      src={HERO_MOODBOARD_IMAGES.monogram}
+                      alt="Monograma autoral em relevo azul-marinho e lacre de cera sobre papel algodão artesanal"
+                      fallbackTitle="Monograma Autoral"
+                      fallbackSubtitle="Desenho Manual & Lacre"
+                      className="object-center transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="pt-2.5 px-1 flex items-center justify-between gap-2">
+                    <span className="font-serif italic text-xs sm:text-sm text-[#1C2D5A] font-medium truncate">
+                      Monograma &amp; Lacre
+                    </span>
+                    <span className="text-[10px] font-mono tabular-nums text-[#5E564B] shrink-0">
+                      01
+                    </span>
+                  </div>
+                </div>
+
+                {/* Frame 2: Estampa em Aquarela */}
+                <div className="bg-white rounded-2xl shadow-sm border border-[#EAE2D8] p-2.5 flex flex-col group transition-shadow duration-300 hover:shadow-md">
+                  <div className="w-full aspect-[4/5] rounded-xl overflow-hidden bg-[#F5F0E8]">
+                    <EditorialImage
+                      src={HERO_MOODBOARD_IMAGES.pattern}
+                      alt="Estampa botânica pintada em aquarela com pincel e pena de caligrafia sobre papel algodão"
+                      fallbackTitle="Estampa Botânica"
+                      fallbackSubtitle="Aquarela & Padronagem"
+                      className="object-center transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="pt-2.5 px-1 flex items-center justify-between gap-2">
+                    <span className="font-serif italic text-xs sm:text-sm text-[#1C2D5A] font-medium truncate">
+                      Estampa em Aquarela
+                    </span>
+                    <span className="text-[10px] font-mono tabular-nums text-[#5E564B] shrink-0">
+                      02
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Row: Full-Width Signature Navy Identity Feature Card */}
+              <div className="bg-[#1C2D5A] text-white rounded-2xl shadow-md border border-[#2B3F75] p-3 sm:p-3.5 grid grid-cols-1 sm:grid-cols-12 gap-3.5 items-center group">
+                <div className="sm:col-span-7 w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#152348]">
+                  <EditorialImage
+                    src={HERO_MOODBOARD_IMAGES.identity}
+                    alt="Suíte completa de papelaria autoral com envelopes em linho azul-marinho, fita de seda e relevo dourado"
+                    fallbackTitle="Identidade Completa"
+                    fallbackSubtitle="Papelaria & Aplicações"
+                    className="object-center transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+
+                <div className="sm:col-span-5 flex flex-col justify-between h-full py-1 px-1 text-left space-y-3">
+                  <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-[#C8D4EA]">
+                    <span>Castle Studio</span>
+                    <span className="font-mono tabular-nums">03</span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <p className="font-serif italic text-base sm:text-lg text-[#FDFBF7] leading-snug">
+                      Papelaria &amp; Universo Visual
+                    </p>
+                    <p className="text-[11px] font-sans text-[#C8D4EA] font-light leading-relaxed">
+                      Harmonização afetiva do convite aos detalhes da celebração.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center space-x-2 pt-1" aria-label="Paleta assinatura Castle">
+                    <span className="w-3 h-3 rounded-full bg-[#FAF6F0] border border-white/25" />
+                    <span className="w-3 h-3 rounded-full bg-[#E5DDD0] border border-white/25" />
+                    <span className="w-3 h-3 rounded-full bg-[#D81B60] border border-white/25" />
+                    <span className="w-3 h-3 rounded-full bg-[#EAA227] border border-white/25" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Moodboard Bottom Meta Bar */}
+              <div className="flex justify-between items-center text-[10px] uppercase tracking-[0.22em] text-[#5E564B] font-medium pt-0.5">
+                <span>Afetividade &amp; Sensibilidade</span>
                 <span>Exclusividade Autoral</span>
               </div>
             </div>
-
-            {/* Overlapping Moodboard Frame 1: Monograma */}
-            <div className="absolute top-4 left-4 sm:top-8 sm:left-6 w-48 sm:w-60 h-60 sm:h-72 bg-white rounded-2xl shadow-md border border-[#EAE2D8] p-4 flex flex-col justify-between transform -rotate-3 transition-transform duration-500 hover:rotate-0 hover:z-20 group">
-              <div className="w-full h-full bg-[#FAF7F2] rounded-xl border border-dashed border-[#D8CEBF] p-4 flex flex-col items-center justify-center text-center relative overflow-hidden">
-                <div className="w-16 h-16 mb-2 opacity-90 transition-transform group-hover:scale-105">
-                  <CastleLogo variant="symbol-only" />
-                </div>
-                <p className="font-serif italic text-xs text-[#1C2D5A] mb-1 font-medium">
-                  [ Projeto Castle — Monograma ]
-                </p>
-                <span className="text-[9px] uppercase tracking-widest text-[#8A8070] font-sans">
-                  Desenho Autoral Manual
-                </span>
-              </div>
-            </div>
-
-            {/* Overlapping Moodboard Frame 2: Estampa & Padronagem */}
-            <div className="absolute top-16 right-4 sm:top-20 sm:right-6 w-52 sm:w-64 h-52 sm:h-64 bg-white rounded-2xl shadow-lg border border-[#EAE2D8] p-4 flex flex-col justify-between transform rotate-4 transition-transform duration-500 hover:rotate-0 hover:z-20 group">
-              <div className="w-full h-full bg-[#F5F0E8] rounded-xl border border-dashed border-[#D5C9B8] p-4 flex flex-col items-center justify-center text-center relative overflow-hidden">
-                <div className="w-12 h-12 rounded-full border border-[#1C2D5A]/30 flex items-center justify-center mb-2 bg-white">
-                  <span className="font-serif italic text-lg text-[#1C2D5A]">C</span>
-                </div>
-                <p className="font-serif italic text-xs text-[#1C2D5A] mb-1 font-medium">
-                  [ Projeto Castle — Estampa ]
-                </p>
-                <span className="text-[9px] uppercase tracking-widest text-[#8A8070] font-sans">
-                  Padronagem & Aquarela
-                </span>
-              </div>
-            </div>
-
-            {/* Overlapping Moodboard Frame 3: Identidade Completa */}
-            <div className="absolute bottom-6 left-12 sm:bottom-8 sm:left-20 w-56 sm:w-72 h-44 sm:h-52 bg-[#1C2D5A] text-white rounded-2xl shadow-xl p-5 flex flex-col justify-between transform rotate-1 transition-transform duration-500 hover:rotate-0 hover:z-30">
-              <div className="flex justify-between items-center text-[9px] tracking-widest uppercase text-[#D0D7E5]">
-                <span>Papelaria & Aplicação</span>
-                <span className="font-serif italic">Castle Studio</span>
-              </div>
-              <div className="my-auto text-center">
-                <p className="font-serif text-sm sm:text-base italic text-[#FDFBF7] tracking-wide mb-1">
-                  [ Projeto Castle — Identidade ]
-                </p>
-                <p className="text-[10px] font-sans text-[#A8B8D8] font-light">
-                  Harmonização Afetiva para o Grande Dia
-                </p>
-              </div>
-              <div className="flex space-x-2 justify-center">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#FAF6F0]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#E5DDD0]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#D81B60]" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#EAA227]" />
-              </div>
-            </div>
-
           </motion.div>
-
         </div>
       </div>
     </section>

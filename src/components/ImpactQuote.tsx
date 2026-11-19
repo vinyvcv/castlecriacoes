@@ -26,7 +26,7 @@ export const ImpactQuote: React.FC = () => {
           </blockquote>
 
           <div className="pt-6">
-            <span className="inline-block text-[11px] uppercase tracking-[0.4em] text-[#8C8275] font-sans font-medium">
+            <span className="inline-block text-[11px] uppercase tracking-[0.35em] text-[#5E564B] font-sans font-medium">
               Castle Criações · Identidade Visual Afetiva
             </span>
           </div>

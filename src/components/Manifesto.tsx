@@ -51,7 +51,7 @@ export const Manifesto: React.FC = () => {
               <p className="text-2xl sm:text-3xl md:text-4xl font-serif italic text-[#1C2D5A] font-medium tracking-tight">
                 “Criamos para celebrar quem você é.”
               </p>
-              <span className="block mt-3 text-[10px] uppercase tracking-[0.3em] text-[#8C8275] font-sans">
+              <span className="block mt-3 text-[11px] uppercase tracking-[0.28em] text-[#5E564B] font-sans font-medium">
                 Filosofia Castle Criações
               </span>
             </div>

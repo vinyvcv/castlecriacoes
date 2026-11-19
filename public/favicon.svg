@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#FAF8F5" />
+  <rect x="2" y="2" width="60" height="60" rx="12" stroke="#E5DDD0" stroke-width="1.5" />
+  <path d="M10 50 Q32 44 54 50" stroke="#1C2D5A" stroke-width="2" stroke-linecap="round" />
+  <!-- Center Tower -->
+  <rect x="26" y="24" width="12" height="23" stroke="#1C2D5A" stroke-width="1.8" />
+  <polygon points="26,24 32,12 38,24" stroke="#1C2D5A" stroke-width="1.8" stroke-linejoin="round" />
+  <line x1="32" y1="12" x2="32" y2="7" stroke="#1C2D5A" stroke-width="1.6" />
+  <path d="M32 7 C35 6.5 37 8.5 40 7.5 L40 11 C37 12 35 10 32 10.5 Z" fill="#EAA227" />
+  <path d="M29 47 L29 39 A3 3 0 0 1 35 39 L35 47 Z" stroke="#1C2D5A" stroke-width="1.5" />
+  <!-- Side Towers -->
+  <rect x="17" y="31" width="9" height="16" stroke="#1C2D5A" stroke-width="1.6" />
+  <polygon points="16,31 21.5,21 27,31" stroke="#1C2D5A" stroke-width="1.6" stroke-linejoin="round" />
+  <rect x="38" y="31" width="9" height="16" stroke="#1C2D5A" stroke-width="1.6" />
+  <polygon points="37,31 42.5,21 48,31" stroke="#1C2D5A" stroke-width="1.6" stroke-linejoin="round" />
+  <!-- Accent Dot -->
+  <circle cx="32" cy="29" r="1.6" fill="#D81B60" />
+</svg>

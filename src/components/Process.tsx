@@ -55,7 +55,7 @@ export const Process: React.FC = () => {
                   <p className="text-sm sm:text-base text-[#4A4A4A] font-light leading-relaxed font-sans">
                     {step.description}
                   </p>
-                  <div className="mt-4 pt-4 border-t border-[#E5DDD0]/60 flex items-center justify-between text-[11px] text-[#8C8275] uppercase tracking-widest font-mono">
+                  <div className="mt-4 pt-4 border-t border-[#E5DDD0]/60 flex items-center justify-between text-[11px] text-[#5E564B] uppercase tracking-widest font-mono">
                     <span>Atendimento Autoral</span>
                     <span>Exclusividade Castle</span>
                   </div>

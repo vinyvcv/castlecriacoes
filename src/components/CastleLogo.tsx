@@ -25,9 +25,7 @@ export const CastleLogo: React.FC<CastleLogoProps> = ({
           <span style={{ color: '#E05A2B' }}>L</span>
           <span style={{ color: '#1E6548' }}>E</span>
         </div>
-        <span 
-          className="text-[9px] md:text-[10px] uppercase tracking-[0.38em] font-medium mt-0.5 text-[#1C2D5A]"
-        >
+        <span className="text-[9px] uppercase tracking-[0.28em] font-medium mt-0.5 text-[#1C2D5A] whitespace-nowrap">
           Identidade Visual Exclusiva
         </span>
       </div>

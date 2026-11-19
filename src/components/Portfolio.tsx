@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, Eye } from 'lucide-react';
-import { CategoryType, PortfolioItem } from '../types';
+import { Eye } from 'lucide-react';
+import { CategoryType, PortfolioItem, StoryEventType } from '../types';
 import { PORTFOLIO_PROJECTS } from '../data/portfolioData';
 import { ProjectModal } from './ProjectModal';
+import { EditorialImage } from './EditorialImage';
 
 interface PortfolioProps {
-  onOpenStoryModal: () => void;
+  onOpenStoryModal: (eventType?: StoryEventType) => void;
 }
 
 export const Portfolio: React.FC<PortfolioProps> = ({ onOpenStoryModal }) => {
@@ -21,9 +22,10 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenStoryModal }) => {
     { key: 'outras', label: 'Outras Celebrações' },
   ];
 
-  const filteredProjects = activeCategory === 'todos'
-    ? PORTFOLIO_PROJECTS
-    : PORTFOLIO_PROJECTS.filter(p => p.category === activeCategory);
+  const filteredProjects =
+    activeCategory === 'todos'
+      ? PORTFOLIO_PROJECTS
+      : PORTFOLIO_PROJECTS.filter((p) => p.category === activeCategory);
 
   return (
     <section id="portfolio" className="py-24 sm:py-32 bg-[#FAF8F5] relative">
@@ -31,12 +33,15 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenStoryModal }) => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="text-xs uppercase tracking-[0.35em] text-[#1C2D5A] font-semibold block mb-3">
-            HISTÓRIAS QUE GANHARAM FORMA
+            Histórias que ganharam forma
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#1A1A1A] font-normal leading-tight">
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#1A1A1A] font-normal leading-tight"
+            style={{ textWrap: 'balance' }}
+          >
             Projetos Castle
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-[#5A5A5A] font-light max-w-xl mx-auto">
+          <p className="mt-4 text-sm sm:text-base text-[#524C44] font-light max-w-xl mx-auto">
             Cada identidade nasce de uma história diferente. Por isso, nenhuma se parece com a outra.
           </p>
         </div>
@@ -46,11 +51,12 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenStoryModal }) => {
           {filterCategories.map((cat) => (
             <button
               key={cat.key}
+              type="button"
               onClick={() => setActiveCategory(cat.key)}
-              className={`px-5 py-2.5 text-xs tracking-widest uppercase transition-all duration-300 rounded-full font-medium ${
+              className={`px-5 py-2.5 text-xs tracking-widest uppercase transition-all duration-300 rounded-full font-medium whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C2D5A] ${
                 activeCategory === cat.key
                   ? 'bg-[#1C2D5A] text-white shadow-sm'
-                  : 'bg-[#F2EDE4] text-[#5A5A5A] hover:bg-[#E8E1D5] hover:text-[#1C2D5A]'
+                  : 'bg-[#F2EDE4] text-[#4F4A42] hover:bg-[#E8E1D5] hover:text-[#1C2D5A]'
               }`}
             >
               {cat.label}
@@ -65,80 +71,86 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenStoryModal }) => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.45 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           >
-            {filteredProjects.map((project, index) => {
-              // Vary heights for editorial masonry feel
-              const heightClass =
-                project.aspectRatio === 'tall'
-                  ? 'h-[420px] sm:h-[460px]'
-                  : project.aspectRatio === 'portrait'
-                  ? 'h-[360px] sm:h-[400px]'
-                  : 'h-[300px] sm:h-[340px]';
-
-              return (
-                <motion.div
+            {filteredProjects.map((project, index) => (
+                <motion.article
                   key={project.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.08 }}
                   onClick={() => setSelectedProject(project)}
-                  className={`group relative rounded-2xl overflow-hidden cursor-pointer bg-[#F3ECE0] border border-[#E5DDD0] shadow-2xs hover:shadow-lg transition-all duration-500 ${heightClass}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setSelectedProject(project);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Ver projeto ${project.clientNames || project.title}`}
+                  className="group relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer bg-[#F3ECE0] border border-[#E5DDD0] shadow-2xs hover:shadow-lg transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1C2D5A]"
                 >
-                  {/* Subtle Placeholder Graphic Content */}
-                  <div className="absolute inset-0 p-6 flex flex-col justify-between items-center text-center bg-gradient-to-b from-[#F5F0E8] to-[#EBE3D5] group-hover:scale-105 transition-transform duration-700">
-                    <div className="w-full flex justify-between items-center text-[10px] uppercase tracking-widest text-[#8A8070]">
-                      <span>Castle Portfolio</span>
+                  {/* Real Cover Image with Smooth Zoom & Fallback */}
+                  <div className="absolute inset-0">
+                    <EditorialImage
+                      src={project.coverImage}
+                      alt={`${project.title} — ${project.clientNames || project.subtitle}`}
+                      fallbackTitle={project.clientNames || project.title}
+                      fallbackSubtitle={project.subtitle}
+                      className="transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+
+                  {/* Measured Bottom Gradient Scrim for Rest-State Legibility */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#121D3A]/85 via-[#121D3A]/20 to-transparent transition-opacity duration-300 group-hover:opacity-0" />
+
+                  {/* Rest-State Editorial Caption */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 text-left text-white transition-opacity duration-300 group-hover:opacity-0">
+                    <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-[#EAE2D6] mb-1.5">
                       <span>{project.categoryLabel}</span>
+                      {project.location && (
+                        <>
+                          <span aria-hidden="true">·</span>
+                          <span>{project.location}</span>
+                        </>
+                      )}
                     </div>
-
-                    <div className="my-auto px-4">
-                      <Sparkles className="w-6 h-6 text-[#EAA227] mx-auto mb-3 opacity-60" />
-                      <p className="font-serif italic text-lg sm:text-xl text-[#1C2D5A] font-medium leading-snug">
-                        {project.placeholderText}
-                      </p>
-                      <p className="text-[11px] font-sans text-[#7A7A7A] mt-2 font-light">
-                        {project.subtitle}
-                      </p>
-                    </div>
-
-                    <div className="text-[10px] uppercase tracking-widest text-[#8A8070]">
-                      Exclusivo & Autoral
-                    </div>
+                    <h3 className="font-serif text-xl sm:text-2xl font-normal text-white leading-snug">
+                      {project.clientNames || project.title}
+                    </h3>
+                    <p className="text-xs font-sans text-[#E4DFD5] font-light mt-1">
+                      {project.subtitle}
+                    </p>
                   </div>
 
                   {/* Discrete Hover Overlay */}
-                  <div className="absolute inset-0 bg-[#1C2D5A]/90 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-8 flex flex-col justify-between items-center text-center backdrop-blur-xs">
+                  <div className="absolute inset-0 bg-[#1C2D5A]/92 text-white opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 p-8 flex flex-col justify-between items-center text-center backdrop-blur-[2px]">
                     <div className="text-[10px] uppercase tracking-[0.3em] text-[#E0E7F5]">
                       {project.categoryLabel}
+                      {project.location ? ` · ${project.location}` : ''}
                     </div>
 
                     <div className="my-auto">
                       <h3 className="font-serif text-2xl font-normal text-white mb-2">
-                        {project.title}
+                        {project.clientNames || project.title}
                       </h3>
-                      <p className="text-xs font-sans text-[#D0D9EB] font-light max-w-xs mx-auto line-clamp-3">
+                      <p className="text-xs font-sans text-[#E0E7F5] font-light max-w-xs mx-auto line-clamp-3 leading-relaxed">
                         {project.story}
                       </p>
                     </div>
 
-                    <div className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-white border-b border-white/40 pb-1 group-hover:border-white transition-colors">
+                    <div className="inline-flex items-center space-x-2 text-xs uppercase tracking-widest text-white border-b border-white/50 pb-1 group-hover:border-white transition-colors">
                       <Eye className="w-3.5 h-3.5" />
                       <span>Ver projeto</span>
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
+                </motion.article>
+            ))}
           </motion.div>
         </AnimatePresence>
-
-        {/* Note about real projects */}
-        <div className="mt-16 text-center text-xs text-[#8A8070] italic font-serif max-w-lg mx-auto">
-          * As áreas de portfólio encontram-se estruturadas com placeholders elegantes e serão atualizadas na próxima etapa com as galerias e fotografias reais dos projetos Castle.
-        </div>
       </div>
 
       {/* Case Study Modal */}
